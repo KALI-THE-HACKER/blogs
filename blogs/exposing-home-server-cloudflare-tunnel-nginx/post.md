@@ -4,21 +4,46 @@ When self-hosting critical developer tooling—such as Nextcloud for storage, n8
 
 However, exposing residential IP addresses directly invites automated bot scans, brute-force SSH attacks, and potential DDoS vectors. Furthermore, Carrier-Grade NAT (CGNAT) deployed by modern fiber and 5G ISPs often makes direct ingress impossible without a public static IPv4 lease.
 
-In this deep dive, we walk through an architecture that achieves **zero inbound open ports** by combining **Cloudflare Tunnel (`cloudflared`)** with an internal **Nginx reverse proxy**. This setup isolates services on distinct Docker bridge networks while applying Cloudflare Zero Trust authentication to sensitive management endpoints.
+In this deep dive, we walk through an architecture that achieves **zero inbound open ports** by combining **Cloudflare Tunnel (`cloudflared`)** with an internal **Nginx reverse proxy** and an **Ubuntu Docker host**. This setup isolates services on distinct Docker bridge networks while applying Cloudflare Zero Trust authentication to sensitive management endpoints.
+
+![Homelab Ingress and Docker Topology](homelab-architecture.png "Complete Homelab Ingress & Docker Service Architecture — Source: www.luckylinux.dev")
+
+*Figure: Complete production homelab topology showing Cloudflare edge routing, Cloudflare Tunnel ingress, Nginx L7 reverse proxy, and containerized workloads running on Ubuntu Docker. Source: [www.luckylinux.dev](https://luckylinux.dev).*
+
+## Complete Homelab Service Topology
+
+All external traffic originating from the World Wide Web (`WWW`) first terminates at the Cloudflare Edge network:
+1. **Static Webpages**: Delivered globally at low latency via **Cloudflare Pages**.
+2. **Dynamic & API Ingress**: Securely tunneled through an outbound **Cloudflare Tunnel** (`cloudflared`) to our local hardware, completely bypassing residential CGNAT and firewall pinholes.
+3. **Nginx Reverse Proxy & L7 Firewall**: Terminates internal SSL/TLS, enforces rate-limiting zones, inspects headers, and fans out requests to local Docker bridge networks.
+
+Our **Ubuntu server** hosts a suite of containerized production and development workloads:
+- **Railsplit Backend**: FastAPI high-concurrency API powering headless browser automation via Playwright, backed by Redis job queues and MySQL storage.
+- **n8n Automation Engine**: Self-hosted low-code workflow automation connected to PostgreSQL for persistent event triggering and cron pipelines.
+- **Self-Hosted Cloud (Nextcloud)**: Private file sync and cloud storage with Redis transactional memory locking and MariaDB relational persistence.
+- **code-server**: Web-accessible VS Code IDE enabling full remote development with edge MFA authentication.
+- **Analytics Server (Plausible)**: Lightweight, privacy-respecting website analytics powered by ClickHouse high-throughput column store and PostgreSQL.
+- **ChronoCare Backend**: FastAPI AI service with a Retrieval-Augmented Generation (RAG) pipeline utilizing Chroma vector database and MySQL.
+- **Server Monitoring Backend**: FastAPI service interfacing with the Linux OS module for hardware metrics, temperatures, and structured application logs.
 
 ## High-Level Request Flow
 
-Instead of listening for inbound SYN packets, the lightweight `cloudflared` daemon establishes multiple outbound HTTP/2 and QUIC connections to the nearest Cloudflare Edge data centers. Inbound client traffic is routed through Cloudflare's Anycast network, through the persistent tunnel, and into our local Nginx reverse proxy.
+Instead of listening for inbound SYN packets on the public WAN, the lightweight `cloudflared` daemon maintains outbound HTTP/2 and QUIC connections to the nearest Cloudflare Anycast edge PoPs. Inbound client traffic is routed through Cloudflare, through the tunnel, and into our local Nginx reverse proxy.
 
 ```mermaid
 graph LR
     Client[Client / Web Browser] -->|HTTPS 443| CF[Cloudflare Edge Anycast]
+    CF -->|Pages Delivery| StaticPages[Cloudflare Pages: Static Sites]
     CF -->|Zero Trust Policy / WAF| Tunnel[Cloudflare Tunnel daemon]
-    subgraph LAN [Homelab Server DMZ]
-        Tunnel -->|Encrypted Outbound Stream| Nginx[Internal Nginx Proxy]
-        Nginx -->|Proxy Pass 8080| Nextcloud[Nextcloud App Container]
-        Nginx -->|Proxy Pass 5678| n8n[n8n Automation Engine]
+    subgraph Host [Ubuntu Server / Docker Engine]
+        Tunnel -->|Encrypted Stream| Nginx[Nginx Reverse Proxy + L7 Firewall]
+        Nginx -->|Proxy Pass 8000| Railsplit[Railsplit: FastAPI + Playwright + Redis + MySQL]
+        Nginx -->|Proxy Pass 5678| n8n[n8n Automation + PostgreSQL]
+        Nginx -->|Proxy Pass 8080| Nextcloud[Nextcloud + Redis + MariaDB]
         Nginx -->|Proxy Pass 8443| CodeServer[code-server IDE]
+        Nginx -->|Proxy Pass 8001| Analytics[Plausible + ClickHouse + PostgreSQL]
+        Nginx -->|Proxy Pass 8002| ChronoCare[ChronoCare: FastAPI + RAG + Chroma + MySQL]
+        Nginx -->|Proxy Pass 8003| ServerBackend[Host Monitor: FastAPI + OS Logs]
     end
 ```
 

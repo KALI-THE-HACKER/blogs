@@ -466,3 +466,22 @@
 [data-theme="dark"] .hljs-built_in {
   color: #B584CC;
 }
+
+/* --- KaTeX Mathematical Typesetting --- */
+.katex-display {
+  margin: var(--space-8) 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: var(--space-2) 0;
+  text-align: center;
+}
+
+.katex {
+  font-size: 1.05em;
+  text-rendering: auto;
+}
+
+[data-theme="dark"] .katex {
+  color: var(--text-primary);
+}
+

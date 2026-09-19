@@ -7,7 +7,7 @@
     "excerpt": "Architecting zero-inbound-port access for homelab developer services using persistent outbound QUIC tunnels, internal Nginx reverse proxies, and edge Zero Trust authentication.",
     "tags": ["homelab", "networking", "security", "docker", "cloudflare", "nginx"],
     "series": "Self-Hosting & Homelab",
-    "cover": "cover.svg",
+    "cover": "cover.png",
     "readingTime": 7,
     "draft": false
   },

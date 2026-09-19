@@ -331,8 +331,42 @@
         breaks: false
       });
 
-      // Parse markdown to HTML
-      let html = marked.parse(markdown);
+      // Step 1: Protect code blocks before extracting math formulas
+      const codePlaceholders = [];
+      let processedMarkdown = markdown.replace(/(```[\s\S]*?```)/g, (match) => {
+        const token = `%%CODE_BLOCK_${codePlaceholders.length}%%`;
+        codePlaceholders.push(match);
+        return token;
+      });
+      processedMarkdown = processedMarkdown.replace(/(`[^`\n]+?`)/g, (match) => {
+        const token = `%%CODE_BLOCK_${codePlaceholders.length}%%`;
+        codePlaceholders.push(match);
+        return token;
+      });
+
+      // Step 2: Extract LaTeX math blocks
+      const mathBlocks = [];
+      // Display math: $$ ... $$
+      processedMarkdown = processedMarkdown.replace(/\$\$([\s\S]+?)\$\$/g, (match, formula) => {
+        const token = `%%MATH_DISPLAY_${mathBlocks.length}%%`;
+        mathBlocks.push({ formula: formula.trim(), display: true });
+        return token;
+      });
+
+      // Inline math: $ ... $
+      processedMarkdown = processedMarkdown.replace(/(?<!\\)\$([^\$\n]+?)(?<!\\)\$/g, (match, formula) => {
+        const token = `%%MATH_INLINE_${mathBlocks.length}%%`;
+        mathBlocks.push({ formula: formula.trim(), display: false });
+        return token;
+      });
+
+      // Step 3: Restore code blocks intact
+      codePlaceholders.forEach((code, idx) => {
+        processedMarkdown = processedMarkdown.replace(`%%CODE_BLOCK_${idx}%%`, code);
+      });
+
+      // Step 4: Parse markdown to HTML
+      let html = marked.parse(processedMarkdown);
 
       // Transform GitHub style callouts: > [!NOTE], > [!TIP], > [!WARNING], > [!IMPORTANT], > [!CAUTION]
       html = html.replace(
@@ -365,8 +399,29 @@
         ADD_TAGS: ["svg", "line", "circle", "path", "polygon", "rect"]
       });
 
+      // Step 5: Substitute KaTeX mathematical typesetting
+      let finalHtml = cleanHtml;
+      mathBlocks.forEach((item, idx) => {
+        const pattern = item.display ? `%%MATH_DISPLAY_${idx}%%` : `%%MATH_INLINE_${idx}%%`;
+        let rendered = "";
+        if (window.katex) {
+          try {
+            rendered = window.katex.renderToString(item.formula, {
+              displayMode: item.display,
+              throwOnError: false
+            });
+          } catch (err) {
+            console.warn("KaTeX render error:", err);
+            rendered = item.display ? `$$\n${item.formula}\n$$` : `$${item.formula}$`;
+          }
+        } else {
+          rendered = item.display ? `$$\n${item.formula}\n$$` : `$${item.formula}$`;
+        }
+        finalHtml = finalHtml.split(pattern).join(rendered);
+      });
+
       // Inject into DOM
-      articleContainer.innerHTML = cleanHtml;
+      articleContainer.innerHTML = finalHtml;
 
       // Attach copy button listeners
       articleContainer.querySelectorAll(".code-copy-btn").forEach((btn) => {
