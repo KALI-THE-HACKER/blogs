@@ -104,8 +104,9 @@
     elements.forEach((el) => observer.observe(el));
   }
 
-  // Inject Plausible analytics if configured
+  // Inject Plausible analytics if configured (and not already in DOM)
   function initAnalytics() {
+    if (document.querySelector('script[data-domain="blog.luckylinux.dev"]') || document.querySelector('script[src*="analytics.luckylinux.dev"]')) return;
     const config = window.SITE_CONFIG?.analytics;
     if (config?.plausibleDomain && config?.plausibleScriptSrc) {
       const script = document.createElement("script");

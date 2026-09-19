@@ -26,8 +26,8 @@ const SITE_CONFIG = {
   // Set plausibleDomain to your domain (e.g., "blog.luckylinux.dev") to enable.
   // Leave empty or null to disable.
   analytics: {
-    plausibleDomain: "", // e.g. "blog.luckylinux.dev"
-    plausibleScriptSrc: "" // e.g. "https://plausible.luckylinux.dev/js/script.js"
+    plausibleDomain: "blog.luckylinux.dev",
+    plausibleScriptSrc: "https://analytics.luckylinux.dev/js/script.js"
   },
 
   // Visitor Counter
