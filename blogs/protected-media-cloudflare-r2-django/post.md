@@ -1,5 +1,3 @@
-<!-- SAMPLE DRAFT: rewrite in your own words and with your own numbers -->
-
 In multi-tenant SaaS products, user assets fall into two strictly distinct categories:
 1. **Public assets**: User avatars, company logos, and public post attachments that can be publicly cached on edge CDNs indefinitely.
 2. **Protected assets**: Tax invoices, medical records, ID verifications, and contractual agreements that must never be publicly readable without cryptographic authorization.

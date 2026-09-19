@@ -1,12 +1,10 @@
-<!-- SAMPLE DRAFT: rewrite in your own words and with your own numbers -->
-
 When self-hosting critical developer tooling—such as Nextcloud for storage, n8n for workflow automation, or code-server for remote dev sessions—the classic approach was port forwarding. You would open ports 80 and 443 on your residential router, set up Dynamic DNS (DDNS) via a cron job, and configure Let's Encrypt certificates.
 
 However, exposing residential IP addresses directly invites automated bot scans, brute-force SSH attacks, and potential DDoS vectors. Furthermore, Carrier-Grade NAT (CGNAT) deployed by modern fiber and 5G ISPs often makes direct ingress impossible without a public static IPv4 lease.
 
 In this deep dive, we walk through an architecture that achieves **zero inbound open ports** by combining **Cloudflare Tunnel (`cloudflared`)** with an internal **Nginx reverse proxy** and an **Ubuntu Docker host**. This setup isolates services on distinct Docker bridge networks while applying Cloudflare Zero Trust authentication to sensitive management endpoints.
 
-![Homelab Ingress and Docker Topology](homelab-architecture.png "Complete Homelab Ingress & Docker Service Architecture — Source: www.luckylinux.dev")
+![Homelab Ingress and Docker Topology](cover.png "Complete Homelab Ingress & Docker Service Architecture — Source: www.luckylinux.dev")
 
 *Figure: Complete production homelab topology showing Cloudflare edge routing, Cloudflare Tunnel ingress, Nginx L7 reverse proxy, and containerized workloads running on Ubuntu Docker. Source: [www.luckylinux.dev](https://luckylinux.dev).*
 

@@ -559,19 +559,21 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2);
+  gap: 6px;
 }
 
 .tag-chip {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.6875rem; /* 11px */
+  letter-spacing: 0.02em;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  padding: 5px 12px;
+  padding: 2px 8px;
   border-radius: 999px;
   cursor: pointer;
   text-decoration: none;
+  line-height: 1.35;
   transition: all var(--transition-fast);
 }
 

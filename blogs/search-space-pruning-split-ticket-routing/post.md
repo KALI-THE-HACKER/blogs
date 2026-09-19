@@ -1,5 +1,3 @@
-<!-- SAMPLE DRAFT: rewrite in your own words and with your own numbers -->
-
 In complex railway networks—such as the UK National Rail network or Indian Railways (IRCTC)—ticket fare matrices are non-additive. Due to historical zoning, yield-management quotas, and regional subsidy tiers, buying two consecutive tickets for the same train ($A \to S$ and $S \to B$) is frequently cheaper than booking a single through-ticket ($A \to B$), even without switching seats.
 
 However, finding optimal split-ticket combinations across national transit graphs is a combinatorial challenge. In a network of $|V| \approx 2,500$ stations, naively evaluating potential split pairs for a journey with $k$ segments explodes into $O(|V|^k)$ query evaluations against high-latency fare engines.
