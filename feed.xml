@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>luckylinux — Engineering Notes</title>
+    <link>https://blog.luckylinux.dev/</link>
+    <description>Notes on building, deploying, and debugging systems, backend infrastructure, and algorithms by Lucky Verma.</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://blog.luckylinux.dev/feed.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>lucky@luckylinux.dev (Lucky Verma)</managingEditor>
+    <webMaster>lucky@luckylinux.dev (Lucky Verma)</webMaster>
+    <item>
+      <title>Exposing a Home Server Safely with Cloudflare Tunnel and Nginx</title>
+      <link>https://blog.luckylinux.dev/post.html?slug=exposing-home-server-cloudflare-tunnel-nginx</link>
+      <guid isPermaLink="true">https://blog.luckylinux.dev/post.html?slug=exposing-home-server-cloudflare-tunnel-nginx</guid>
+      <pubDate>Fri, 14 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Architecting zero-inbound-port access for homelab developer services using persistent outbound QUIC tunnels, internal Nginx reverse proxies, and edge Zero Trust authentication.</description>
+      <category>homelab</category>
+      <category>networking</category>
+      <category>security</category>
+      <category>docker</category>
+      <category>cloudflare</category>
+      <category>nginx</category>
+    </item>
+    <item>
+      <title>Protected Media with Cloudflare R2, Pre-signed URLs, and django-storages</title>
+      <link>https://blog.luckylinux.dev/post.html?slug=protected-media-cloudflare-r2-django</link>
+      <guid isPermaLink="true">https://blog.luckylinux.dev/post.html?slug=protected-media-cloudflare-r2-django</guid>
+      <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Implementing dual-bucket isolation of public vs private tenant assets in Django using Cloudflare R2 object storage, S3v4 pre-signed expiring download URLs, and zero egress fees.</description>
+      <category>django</category>
+      <category>python</category>
+      <category>backend</category>
+      <category>cloudflare</category>
+      <category>storage</category>
+      <category>aws-s3</category>
+    </item>
+    <item>
+      <title>Search-Space Pruning for Split-Ticket Routing</title>
+      <link>https://blog.luckylinux.dev/post.html?slug=search-space-pruning-split-ticket-routing</link>
+      <guid isPermaLink="true">https://blog.luckylinux.dev/post.html?slug=search-space-pruning-split-ticket-routing</guid>
+      <pubDate>Fri, 12 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Using geometric elliptic bounding and vectorized spherical trigonometry in NumPy to prune 97% of candidate stations in combinatorial transit fare optimization.</description>
+      <category>algorithms</category>
+      <category>python</category>
+      <category>graph-theory</category>
+      <category>routing</category>
+      <category>optimization</category>
+    </item>
+  </channel>
+</rss>

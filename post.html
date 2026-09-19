@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article — luckylinux</title>
+  <meta name="description" content="Technical engineering note by Lucky Verma." />
+  
+  <!-- Open Graph / Twitter Fallbacks (updated dynamically by post.js) -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Article — luckylinux" />
+  <meta property="og:description" content="Technical engineering deep-dive on backend systems." />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="luckylinux Engineering Notes RSS" href="./feed.xml" />
+
+  <!-- Prevent Theme Flash -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem("luckylinux_theme");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved === "dark" || (!saved && prefersDark) ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/markdown.css" />
+
+  <!-- Pinned CDN Markdown & Highlight dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.2/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress-bar" class="reading-progress-bar" role="progressbar" aria-label="Reading progress"></div>
+
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="./" class="brand" aria-label="luckylinux home">
+        <span class="brand-wordmark">luckylinux<span class="brand-dot">.</span></span>
+        <span class="brand-subtitle">engineering notes</span>
+      </a>
+
+      <div class="header-actions">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="./" class="nav-link">Home</a></li>
+            <li><a href="./blog.html" class="nav-link">Blog</a></li>
+            <li><a href="./about.html" class="nav-link">About</a></li>
+            <li>
+              <a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-external">
+                Portfolio <span class="nav-external-arrow">↗</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Theme Toggle -->
+        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Nav Toggle -->
+        <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <div class="container" style="padding-bottom: var(--space-20);">
+      
+      <!-- Loading Placeholder -->
+      <div id="post-loading" style="padding: var(--space-16) 0; text-align: center;">
+        <p style="font-family: var(--font-mono); font-size: 0.9375rem; color: var(--text-muted);">
+          Loading article...
+        </p>
+      </div>
+
+      <!-- Error State -->
+      <div id="post-error" style="display: none; padding: var(--space-16) 0; text-align: center;">
+        <h1 style="font-size: 2rem; margin-bottom: var(--space-4);">Article Not Found</h1>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-6);">
+          The requested article could not be found or has been moved.
+        </p>
+        <a href="./blog.html" class="btn-secondary">Browse all articles →</a>
+      </div>
+
+      <!-- Post Header -->
+      <header class="post-header">
+        <a href="./blog.html" class="post-back-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>All articles</span>
+        </a>
+
+        <div style="margin-bottom: var(--space-3);">
+          <span id="post-header-series" class="series-badge" style="display: none;"></span>
+        </div>
+
+        <h1 id="post-header-title" class="post-title"></h1>
+
+        <div class="post-meta-bar">
+          <time id="post-header-date"></time>
+          <span>•</span>
+          <span id="post-header-reading-time"></span>
+          <span>•</span>
+          <div id="post-header-tags" class="post-card-tags" style="display: inline-flex;"></div>
+        </div>
+      </header>
+
+      <!-- Post Cover Image (optional) -->
+      <div id="post-cover-container" class="post-cover-image-container" style="display: none;">
+        <img id="post-cover-img" class="post-cover-image" alt="Article cover" />
+      </div>
+
+      <!-- Mobile Collapsible Table of Contents -->
+      <details id="mobile-toc-details" class="mobile-toc-details">
+        <summary>Table of Contents</summary>
+        <nav id="mobile-toc-nav" class="toc-nav" aria-label="Table of Contents (Mobile)"></nav>
+      </details>
+
+      <!-- Post Layout (Prose Content + Desktop Sticky TOC) -->
+      <div class="post-body-layout">
+        <!-- Article Prose Content -->
+        <article id="post-article-content" class="prose" style="display: none;">
+          <!-- Dynamically parsed Markdown HTML injected here -->
+        </article>
+
+        <!-- Desktop Sticky Table of Contents -->
+        <aside id="toc-sidebar" class="toc-sidebar" aria-label="Table of Contents">
+          <div class="toc-title">On this page</div>
+          <nav id="desktop-toc-nav" class="toc-nav" aria-label="Table of Contents (Desktop)"></nav>
+        </aside>
+      </div>
+
+      <!-- Post Bottom Actions -->
+      <div class="post-footer-actions">
+        <div>
+          <a id="edit-on-github-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            <span>Edit on GitHub</span>
+          </a>
+        </div>
+
+        <div class="post-action-buttons">
+          <button type="button" id="share-copy-link-btn" class="btn-secondary" aria-label="Copy link to clipboard">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copy link</span>
+          </button>
+
+          <a id="share-twitter-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="Share on X / Twitter">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <span>Share</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Previous / Next Navigation -->
+      <nav id="prev-next-nav" class="prev-next-nav" aria-label="Article navigation"></nav>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-title">luckylinux<span style="color: var(--accent);">.</span></div>
+          <p class="footer-brand-desc">
+            Independent technical engineering notes written by Lucky Verma. No trackers, no ads, just systems engineering.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <div class="footer-link-group-title">Navigation</div>
+            <ul>
+              <li><a href="./" class="footer-link">Home</a></li>
+              <li><a href="./blog.html" class="footer-link">All Posts</a></li>
+              <li><a href="./about.html" class="footer-link">About</a></li>
+              <li><a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Portfolio ↗</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-link-group-title">Connect</div>
+            <ul>
+              <li><a href="https://github.com/KALI-THE-HACKER" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub ↗</a></li>
+              <li><a href="https://linkedin.com/in/luckylinux" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn ↗</a></li>
+              <li><a href="./feed.xml" class="footer-link">RSS Feed</a></li>
+              <li><a href="./sitemap.xml" class="footer-link">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © <span id="footer-year">2026</span> Lucky Verma. Built with plain HTML, CSS &amp; vanilla JS.
+        </div>
+        <div id="visitor-counter" class="visitor-counter" style="display: none;">
+          <span class="counter-dot"></span>
+          <span id="visitor-count-number">0</span>
+          <span>visits</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/config.js"></script>
+  <script src="./js/theme.js"></script>
+  <script src="./js/counter.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/toc.js"></script>
+  <script src="./js/post.js"></script>
+</body>
+</html>

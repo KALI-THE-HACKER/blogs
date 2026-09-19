@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luckylinux — Notes on building, deploying, and debugging systems</title>
+  <meta name="description" content="Technical engineering blog by Lucky Verma (luckylinux). Deep-dives on backend architectures, Cloudflare, Docker, distributed queues, self-hosting, and systems engineering." />
+  
+  <!-- Canonical & Open Graph -->
+  <link rel="canonical" href="https://blog.luckylinux.dev/" />
+  <meta property="og:title" content="luckylinux — Engineering Notes" />
+  <meta property="og:description" content="Notes on building, deploying, and debugging backend systems and distributed infrastructure." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://blog.luckylinux.dev/" />
+  <meta property="og:image" content="./assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="luckylinux — Engineering Notes" />
+  <meta name="twitter:description" content="Notes on building, deploying, and debugging backend systems and distributed infrastructure." />
+  <meta name="twitter:image" content="./assets/og-image.svg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="luckylinux Engineering Notes RSS" href="./feed.xml" />
+
+  <!-- Prevent Theme Flash -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem("luckylinux_theme");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved === "dark" || (!saved && prefersDark) ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+</head>
+<body>
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="./" class="brand" aria-label="luckylinux home">
+        <span class="brand-wordmark">luckylinux<span class="brand-dot">.</span></span>
+        <span class="brand-subtitle">engineering notes</span>
+      </a>
+
+      <div class="header-actions">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="./" class="nav-link active">Home</a></li>
+            <li><a href="./blog.html" class="nav-link">Blog</a></li>
+            <li><a href="./about.html" class="nav-link">About</a></li>
+            <li>
+              <a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-external">
+                Portfolio <span class="nav-external-arrow">↗</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Theme Toggle -->
+        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle theme">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg class="icon-moon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Nav Toggle -->
+        <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Writing-Focused Hero -->
+    <section class="hero-section">
+      <div class="container">
+        <p class="hero-subtitle">Engineering Notes &amp; Systems Architecture</p>
+        <h1 class="hero-title">Notes on building, deploying, and debugging systems.</h1>
+        <p class="hero-lead">
+          Technical deep-dives on backend services, networking primitives, self-hosted infrastructure, and algorithms used in production.
+        </p>
+        <div class="hero-byline">
+          <span>By</span>
+          <a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="hero-byline-link">Lucky Verma</a>
+          <span>•</span>
+          <span>B.Tech CDS at NITK Surathkal</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div class="container" style="padding-top: var(--space-12); padding-bottom: var(--space-16);">
+      
+      <!-- Featured Post -->
+      <section aria-labelledby="featured-heading" id="featured-post-container" style="display: none;">
+        <h2 id="featured-heading" class="sr-only">Featured Article</h2>
+        <div id="featured-post-mount"></div>
+      </section>
+
+      <!-- Recent Posts List -->
+      <section aria-labelledby="recent-posts-heading">
+        <div class="section-header">
+          <h2 id="recent-posts-heading" class="section-title">Recent Articles</h2>
+          <a href="./blog.html" class="section-link">View all posts →</a>
+        </div>
+        
+        <div class="post-cards-grid" id="home-posts-list">
+          <!-- Populated dynamically from blogs/posts.json -->
+        </div>
+      </section>
+
+      <!-- Topics / Tag Cloud -->
+      <section class="topic-cloud-section" aria-labelledby="topics-heading">
+        <div class="section-header">
+          <h2 id="topics-heading" class="section-title">Topics</h2>
+          <span class="brand-subtitle">Categories &amp; Tags</span>
+        </div>
+        <div class="topic-cloud" id="home-topic-cloud">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-title">luckylinux<span style="color: var(--accent);">.</span></div>
+          <p class="footer-brand-desc">
+            Independent technical engineering notes written by Lucky Verma. No trackers, no ads, just systems engineering.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <div class="footer-link-group-title">Navigation</div>
+            <ul>
+              <li><a href="./" class="footer-link">Home</a></li>
+              <li><a href="./blog.html" class="footer-link">All Posts</a></li>
+              <li><a href="./about.html" class="footer-link">About</a></li>
+              <li><a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Portfolio ↗</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-link-group-title">Connect</div>
+            <ul>
+              <li><a href="https://github.com/KALI-THE-HACKER" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub ↗</a></li>
+              <li><a href="https://linkedin.com/in/luckylinux" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn ↗</a></li>
+              <li><a href="./feed.xml" class="footer-link">RSS Feed</a></li>
+              <li><a href="./sitemap.xml" class="footer-link">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © <span id="footer-year">2026</span> Lucky Verma. Built with plain HTML, CSS &amp; vanilla JS.
+        </div>
+        <!-- Visitor Counter (Graceful fallback) -->
+        <div id="visitor-counter" class="visitor-counter" style="display: none;">
+          <span class="counter-dot"></span>
+          <span id="visitor-count-number">0</span>
+          <span>visits</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/config.js"></script>
+  <script src="./js/theme.js"></script>
+  <script src="./js/counter.js"></script>
+  <script src="./js/main.js"></script>
+  
+  <!-- Index Page Dynamic Loader -->
+  <script>
+    (function () {
+      function formatDate(dateStr) {
+        if (!dateStr) return "";
+        const options = { year: "numeric", month: "short", day: "numeric" };
+        const parts = dateStr.split("-");
+        if (parts.length === 3) {
+          const date = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+          return date.toLocaleDateString("en-US", options);
+        }
+        return new Date(dateStr).toLocaleDateString("en-US", options);
+      }
+
+      async function loadHomeContent() {
+        try {
+          const res = await fetch("./blogs/posts.json");
+          if (!res.ok) return;
+          const posts = await res.json();
+          const activePosts = posts.filter(p => !p.draft);
+          if (activePosts.length === 0) return;
+
+          // Featured Post (First item)
+          const featured = activePosts[0];
+          const featuredContainer = document.getElementById("featured-post-container");
+          const featuredMount = document.getElementById("featured-post-mount");
+
+          if (featured && featuredContainer && featuredMount) {
+            const coverSrc = featured.cover
+              ? (featured.cover.startsWith("http") ? featured.cover : `./blogs/${featured.slug}/${featured.cover}`)
+              : "./assets/og-image.svg";
+
+            featuredMount.innerHTML = `
+              <a href="./post.html?slug=${featured.slug}" class="post-card-featured reveal-on-scroll">
+                <div class="featured-cover-wrapper">
+                  <img src="${coverSrc}" alt="${featured.title}" class="featured-cover-img" loading="eager" />
+                </div>
+                <div class="featured-content">
+                  <span class="featured-badge">Featured Article</span>
+                  <div class="post-card-meta">
+                    <time datetime="${featured.date}">${formatDate(featured.date)}</time>
+                    <span class="meta-sep">•</span>
+                    <span>${featured.readingTime || 5} min read</span>
+                    ${featured.series ? `<span class="meta-sep">•</span><span class="series-badge">${featured.series}</span>` : ""}
+                  </div>
+                  <h3 class="post-card-title" style="font-size: 1.65rem; margin-bottom: var(--space-3);">${featured.title}</h3>
+                  <p class="post-card-excerpt" style="-webkit-line-clamp: 3; margin-bottom: var(--space-4);">${featured.excerpt}</p>
+                  <div class="post-card-tags">
+                    ${(featured.tags || []).map(t => `<span class="tag-badge">#${t}</span>`).join("")}
+                  </div>
+                </div>
+              </a>
+            `;
+            featuredContainer.style.display = "block";
+          }
+
+          // Remaining Posts List
+          const remainingPosts = activePosts.slice(1);
+          const listContainer = document.getElementById("home-posts-list");
+          if (listContainer) {
+            listContainer.innerHTML = remainingPosts.map(post => `
+              <article class="reveal-on-scroll">
+                <a href="./post.html?slug=${post.slug}" class="post-card">
+                  <div class="post-card-meta">
+                    <time datetime="${post.date}">${formatDate(post.date)}</time>
+                    <span class="meta-sep">•</span>
+                    <span>${post.readingTime || 5} min read</span>
+                    ${post.series ? `<span class="meta-sep">•</span><span class="series-badge">${post.series}</span>` : ""}
+                  </div>
+                  <h3 class="post-card-title">${post.title}</h3>
+                  <p class="post-card-excerpt">${post.excerpt}</p>
+                  <div class="post-card-tags">
+                    ${(post.tags || []).map(t => `<span class="tag-badge">#${t}</span>`).join("")}
+                  </div>
+                </a>
+              </article>
+            `).join("");
+          }
+
+          // Topic Cloud
+          const tagCounts = {};
+          activePosts.forEach(p => {
+            (p.tags || []).forEach(t => {
+              tagCounts[t] = (tagCounts[t] || 0) + 1;
+            });
+          });
+
+          const topicCloud = document.getElementById("home-topic-cloud");
+          if (topicCloud) {
+            topicCloud.innerHTML = Object.keys(tagCounts).sort().map(tag => `
+              <a href="./blog.html?tag=${encodeURIComponent(tag)}" class="topic-tag-card">
+                <span>#${tag}</span>
+                <span class="topic-count">(${tagCounts[tag]})</span>
+              </a>
+            `).join("");
+          }
+
+          if (window.initScrollReveal) {
+            window.initScrollReveal();
+          }
+        } catch (e) {
+          console.error("Home loader error:", e);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", loadHomeContent);
+    })();
+  </script>
+</body>
+</html>

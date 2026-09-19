@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — luckylinux</title>
+  <meta name="description" content="About luckylinux engineering notes by Lucky Verma. Computational & Data Science student at NITK Surathkal writing about backend engineering, infrastructure, and distributed systems." />
+  
+  <!-- Canonical & Open Graph -->
+  <link rel="canonical" href="https://blog.luckylinux.dev/about.html" />
+  <meta property="og:title" content="About — luckylinux" />
+  <meta property="og:description" content="About luckylinux engineering notes by Lucky Verma." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://blog.luckylinux.dev/about.html" />
+  <meta property="og:image" content="./assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="luckylinux Engineering Notes RSS" href="./feed.xml" />
+
+  <!-- Prevent Theme Flash -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem("luckylinux_theme");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved === "dark" || (!saved && prefersDark) ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/markdown.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="./" class="brand" aria-label="luckylinux home">
+        <span class="brand-wordmark">luckylinux<span class="brand-dot">.</span></span>
+        <span class="brand-subtitle">engineering notes</span>
+      </a>
+
+      <div class="header-actions">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="./" class="nav-link">Home</a></li>
+            <li><a href="./blog.html" class="nav-link">Blog</a></li>
+            <li><a href="./about.html" class="nav-link active">About</a></li>
+            <li>
+              <a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-external">
+                Portfolio <span class="nav-external-arrow">↗</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Theme Toggle -->
+        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Nav Toggle -->
+        <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <div class="container" style="padding-top: var(--space-12); padding-bottom: var(--space-20);">
+      
+      <article class="prose" style="max-width: 65ch;">
+        <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.2rem); margin-bottom: var(--space-6);">About the Writing</h1>
+
+        <p>
+          This is an engineering notebook maintained by <strong>Lucky Verma</strong> (handle: <code>luckylinux</code>), a B.Tech Computational &amp; Data Science student at NITK Surathkal.
+        </p>
+
+        <p>
+          The focus here is entirely on technical writing: architectural notes, debugging post-mortems, distributed systems trade-offs, and practical how-tos drawn from building and maintaining real systems.
+        </p>
+
+        <p>
+          You can inspect my code on <a href="https://github.com/KALI-THE-HACKER" target="_blank" rel="noopener noreferrer">GitHub</a>, view my personal projects and bio on <a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer">luckylinux.dev</a>, or connect professionally on <a href="https://linkedin.com/in/luckylinux" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+        </p>
+
+        <hr />
+
+        <h2>What I Write About</h2>
+        <p>
+          Topics covered in these notes center on reliable backend infrastructure and practical computer science:
+        </p>
+
+        <ul>
+          <li><strong>Backend Architectures:</strong> High-throughput FastAPI asynchronous services, Django domain modeling, and PostgreSQL indexing strategies.</li>
+          <li><strong>Container &amp; Edge Ingress:</strong> Docker Compose setups, Cloudflare Tunnel (outbound-only zero-port architectures), and hardened Nginx reverse proxy routing.</li>
+          <li><strong>Distributed Queues &amp; Streaming:</strong> Redis task queues, Server-Sent Events (SSE), and WebSocket orchestration.</li>
+          <li><strong>Object Storage:</strong> Cloudflare R2 dual-bucket isolation, temporary S3v4 pre-signed expiring download URLs, and zero-egress delivery pipelines.</li>
+          <li><strong>Self-Hosted Infrastructure:</strong> Running homelab services including Nextcloud, n8n automation, Plausible analytics, and remote code-server environments.</li>
+          <li><strong>Security &amp; CTF Infrastructure:</strong> Hosting CTFd environments, container isolation, and edge Zero Trust policies.</li>
+          <li><strong>AI Systems &amp; RAG:</strong> LangGraph workflow orchestrations and retrieval-augmented generation pipelines.</li>
+          <li><strong>Algorithms &amp; Geometry:</strong> Applied graph algorithms, spatial indexing, and search-space pruning in real-world routing.</li>
+        </ul>
+
+        <hr />
+
+        <h2>Colophon</h2>
+        <p>
+          This site is static, minimal, and built without frameworks or build steps.
+        </p>
+        <ul>
+          <li>Typography: <a href="https://fonts.google.com/specimen/Fraunces" target="_blank" rel="noopener noreferrer">Fraunces</a> for headings, <a href="https://fonts.google.com/specimen/Newsreader" target="_blank" rel="noopener noreferrer">Newsreader</a> for prose, <a href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener noreferrer">Inter</a> for UI, and <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener noreferrer">JetBrains Mono</a> for code.</li>
+          <li>Markdown rendering: Client-side <a href="https://github.com/markedjs/marked" target="_blank" rel="noopener noreferrer">marked</a>, highlighted with <a href="https://highlightjs.org/" target="_blank" rel="noopener noreferrer">highlight.js</a>, sanitized via <a href="https://github.com/cure53/DOMPurify" target="_blank" rel="noopener noreferrer">DOMPurify</a>, and diagrams powered by <a href="https://mermaid.js.org/" target="_blank" rel="noopener noreferrer">Mermaid</a>.</li>
+          <li>Hosting: GitHub Pages from raw static source files, routed optionally via Cloudflare CNAME to <code>blog.luckylinux.dev</code>.</li>
+        </ul>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-title">luckylinux<span style="color: var(--accent);">.</span></div>
+          <p class="footer-brand-desc">
+            Independent technical engineering notes written by Lucky Verma. No trackers, no ads, just systems engineering.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <div class="footer-link-group-title">Navigation</div>
+            <ul>
+              <li><a href="./" class="footer-link">Home</a></li>
+              <li><a href="./blog.html" class="footer-link">All Posts</a></li>
+              <li><a href="./about.html" class="footer-link">About</a></li>
+              <li><a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Portfolio ↗</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-link-group-title">Connect</div>
+            <ul>
+              <li><a href="https://github.com/KALI-THE-HACKER" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub ↗</a></li>
+              <li><a href="https://linkedin.com/in/luckylinux" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn ↗</a></li>
+              <li><a href="./feed.xml" class="footer-link">RSS Feed</a></li>
+              <li><a href="./sitemap.xml" class="footer-link">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © <span id="footer-year">2026</span> Lucky Verma. Built with plain HTML, CSS &amp; vanilla JS.
+        </div>
+        <div id="visitor-counter" class="visitor-counter" style="display: none;">
+          <span class="counter-dot"></span>
+          <span id="visitor-count-number">0</span>
+          <span>visits</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/config.js"></script>
+  <script src="./js/theme.js"></script>
+  <script src="./js/counter.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

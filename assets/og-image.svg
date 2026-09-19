@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Editorial Background -->
+  <rect width="1200" height="630" fill="#FAF6EE"/>
+  
+  <!-- Subtle Grid Hairlines -->
+  <line x1="80" y1="80" x2="1120" y2="80" stroke="#1F1B16" stroke-opacity="0.08" stroke-width="1"/>
+  <line x1="80" y1="550" x2="1120" y2="550" stroke="#1F1B16" stroke-opacity="0.08" stroke-width="1"/>
+  <line x1="80" y1="80" x2="80" y2="550" stroke="#1F1B16" stroke-opacity="0.08" stroke-width="1"/>
+  <line x1="1120" y1="80" x2="1120" y2="550" stroke="#1F1B16" stroke-opacity="0.08" stroke-width="1"/>
+
+  <!-- Brand Wordmark Header -->
+  <text x="140" y="160" font-family="'Fraunces', Georgia, serif" font-weight="700" font-size="44" fill="#1F1B16" letter-spacing="-1">luckylinux<tspan fill="#B4532A">.</tspan></text>
+  <text x="360" y="157" font-family="'JetBrains Mono', monospace" font-size="20" fill="#847B6F" letter-spacing="2">ENGINEERING NOTES</text>
+
+  <!-- Title Copy -->
+  <text x="140" y="300" font-family="'Fraunces', Georgia, serif" font-weight="600" font-size="64" fill="#1F1B16" letter-spacing="-2">Notes on building,</text>
+  <text x="140" y="375" font-family="'Fraunces', Georgia, serif" font-weight="600" font-size="64" fill="#1F1B16" letter-spacing="-2">deploying, and debugging</text>
+  <text x="140" y="450" font-family="'Fraunces', Georgia, serif" font-weight="600" font-size="64" fill="#B4532A" letter-spacing="-2">distributed systems.</text>
+
+  <!-- Author Byline Footer -->
+  <text x="140" y="520" font-family="'Inter', sans-serif" font-weight="500" font-size="22" fill="#5E5549">Lucky Verma</text>
+  <text x="290" y="520" font-family="'Inter', sans-serif" font-weight="400" font-size="22" fill="#847B6F">•  blog.luckylinux.dev</text>
+
+  <!-- Geometric Accent Mark -->
+  <circle cx="1040" cy="155" r="8" fill="#B4532A"/>
+  <circle cx="1000" cy="155" r="4" fill="#2F5D50"/>
+</svg>

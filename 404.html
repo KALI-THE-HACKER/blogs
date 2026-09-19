@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found — luckylinux</title>
+  <meta name="description" content="The requested note or document could not be found." />
+  
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+
+  <!-- Prevent Theme Flash -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem("luckylinux_theme");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved === "dark" || (!saved && prefersDark) ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="./" class="brand" aria-label="luckylinux home">
+        <span class="brand-wordmark">luckylinux<span class="brand-dot">.</span></span>
+        <span class="brand-subtitle">engineering notes</span>
+      </a>
+
+      <div class="header-actions">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="./" class="nav-link">Home</a></li>
+            <li><a href="./blog.html" class="nav-link">Blog</a></li>
+            <li><a href="./about.html" class="nav-link">About</a></li>
+            <li>
+              <a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-external">
+                Portfolio <span class="nav-external-arrow">↗</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Theme Toggle -->
+        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Nav Toggle -->
+        <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <div class="container" style="padding-top: var(--space-20); padding-bottom: var(--space-24); text-align: center;">
+      <p style="font-family: var(--font-mono); font-size: 0.9375rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-3);">
+        404 / Route Not Found
+      </p>
+      <h1 style="font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: var(--space-4);">
+        This document does not exist.
+      </h1>
+      <p style="color: var(--text-secondary); max-width: 50ch; margin: 0 auto var(--space-8) auto; font-size: 1.125rem;">
+        The note you are looking for may have been restructured, renamed, or is currently unpublished.
+      </p>
+
+      <div style="display: inline-flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+        <a href="./" class="btn-secondary" style="padding: 10px 20px;">Return Home</a>
+        <a href="./blog.html" class="btn-secondary" style="padding: 10px 20px; border-color: var(--accent); color: var(--accent);">Browse All Articles →</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-title">luckylinux<span style="color: var(--accent);">.</span></div>
+          <p class="footer-brand-desc">
+            Independent technical engineering notes written by Lucky Verma.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <div class="footer-link-group-title">Navigation</div>
+            <ul>
+              <li><a href="./" class="footer-link">Home</a></li>
+              <li><a href="./blog.html" class="footer-link">All Posts</a></li>
+              <li><a href="./about.html" class="footer-link">About</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-link-group-title">Connect</div>
+            <ul>
+              <li><a href="https://github.com/KALI-THE-HACKER" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub ↗</a></li>
+              <li><a href="https://luckylinux.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Portfolio ↗</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© <span id="footer-year">2026</span> Lucky Verma.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/config.js"></script>
+  <script src="./js/theme.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

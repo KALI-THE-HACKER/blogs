@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <rect width="1200" height="675" fill="#F3ECE1"/>
+
+  <!-- Blueprint Coordinate Grid -->
+  <g stroke="#1F1B16" stroke-opacity="0.06" stroke-width="1">
+    <line x1="200" y1="0" x2="200" y2="675"/>
+    <line x1="400" y1="0" x2="400" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="800" y1="0" x2="800" y2="675"/>
+    <line x1="1000" y1="0" x2="1000" y2="675"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>
+
+  <!-- Ellipse Search Space Graphic -->
+  <g transform="translate(600, 310)">
+    <!-- Bounding Ellipse (Search Space) -->
+    <ellipse cx="0" cy="0" rx="360" ry="140" fill="none" stroke="#B4532A" stroke-width="2" stroke-dasharray="6,6"/>
+    <text x="0" y="-155" font-family="'JetBrains Mono', monospace" font-size="12" fill="#B4532A" text-anchor="middle">ELLIPSE BOUNDARY: dist(Origin, S) + dist(S, Dest) &lt;= λ · DirectDist</text>
+
+    <!-- Excluded Nodes (Out of Bounds) -->
+    <circle cx="-380" cy="-160" r="4" fill="#847B6F" opacity="0.4"/>
+    <circle cx="280" cy="180" r="4" fill="#847B6F" opacity="0.4"/>
+    <circle cx="-20" cy="200" r="4" fill="#847B6F" opacity="0.4"/>
+    <circle cx="420" cy="-120" r="4" fill="#847B6F" opacity="0.4"/>
+
+    <!-- Foci (Origin and Destination) -->
+    <circle cx="-240" cy="0" r="8" fill="#1F1B16"/>
+    <text x="-240" y="-18" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#1F1B16" text-anchor="middle">ORIGIN (A)</text>
+
+    <circle cx="240" cy="0" r="8" fill="#1F1B16"/>
+    <text x="240" y="-18" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#1F1B16" text-anchor="middle">DEST (B)</text>
+
+    <!-- Candidate Split Station Inside Ellipse -->
+    <circle cx="40" cy="-45" r="7" fill="#2F5D50"/>
+    <text x="40" y="-60" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#2F5D50" text-anchor="middle">CANDIDATE STATION (S)</text>
+
+    <!-- Route Vectors -->
+    <line x1="-240" y1="0" x2="240" y2="0" stroke="#1F1B16" stroke-opacity="0.25" stroke-width="2"/>
+    <line x1="-240" y1="0" x2="40" y2="-45" stroke="#2F5D50" stroke-width="2.5"/>
+    <line x1="40" y1="-45" x2="240" y2="0" stroke="#2F5D50" stroke-width="2.5"/>
+  </g>
+
+  <!-- Outer Frame -->
+  <rect x="60" y="60" width="1080" height="555" fill="none" stroke="#1F1B16" stroke-opacity="0.12" stroke-width="1"/>
+
+  <text x="100" y="120" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="600" fill="#B4532A" letter-spacing="2">ALGORITHMS &amp; GRAPH THEORY</text>
+
+  <text x="100" y="500" font-family="'Fraunces', Georgia, serif" font-weight="700" font-size="44" fill="#1F1B16" letter-spacing="-1">Search-Space Pruning for Split-Ticket Routing</text>
+  <text x="100" y="555" font-family="'Newsreader', Georgia, serif" font-style="italic" font-size="24" fill="#5E5549">Elliptic bounding geometry for combinatorial journey search in transit networks.</text>
+</svg>

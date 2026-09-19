@@ -1,0 +1,327 @@
+/* ==========================================================================
+   base.css - Design Tokens, Typography, Reset, and Foundational Styles
+   luckylinux - Technical Engineering Blog
+   ========================================================================== */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap');
+
+/* --- Root Design Tokens (Light Theme by Default) --- */
+:root {
+  --font-heading: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, Monaco, monospace;
+
+  /* Color Palette - Light Editorial */
+  --bg-primary: #FAF6EE;
+  --bg-surface: #F3ECE1;
+  --bg-surface-raised: #FFFFFF;
+  --bg-subtle: #EFE8DC;
+  
+  --text-primary: #1F1B16;
+  --text-secondary: #5E5549;
+  --text-muted: #847B6F;
+  --text-faint: #B5AB9D;
+
+  --border-color: rgba(45, 36, 26, 0.10);
+  --border-subtle: rgba(45, 36, 26, 0.05);
+  --border-hover: rgba(45, 36, 26, 0.22);
+
+  /* Restrained Terracotta Accent */
+  --accent: #B4532A;
+  --accent-hover: #96421E;
+  --accent-faint: rgba(180, 83, 42, 0.08);
+  --accent-border: rgba(180, 83, 42, 0.25);
+  --accent-contrast: #FFFFFF;
+
+  /* Callout & Status Tones (Warm, subdued) */
+  --color-note-bg: rgba(60, 90, 150, 0.06);
+  --color-note-border: #3C5A96;
+  --color-note-text: #2A4275;
+
+  --color-tip-bg: rgba(47, 93, 80, 0.07);
+  --color-tip-border: #2F5D50;
+  --color-tip-text: #1E463C;
+
+  --color-warning-bg: rgba(180, 83, 42, 0.07);
+  --color-warning-border: #B4532A;
+  --color-warning-text: #823819;
+
+  /* Spacing Scale (8px system) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Layout Widths */
+  --container-max: 1120px;
+  --article-max: 68ch;
+  --header-height: 64px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  --theme-transition: background-color 260ms ease, color 260ms ease, border-color 260ms ease;
+}
+
+/* --- Dark Theme Tokens (Warm Charcoal, NEVER Pure Black) --- */
+[data-theme="dark"] {
+  --bg-primary: #141210;
+  --bg-surface: #1E1B18;
+  --bg-surface-raised: #25221E;
+  --bg-subtle: #191613;
+
+  --text-primary: #EDE6D8;
+  --text-secondary: #ABA091;
+  --text-muted: #7E7467;
+  --text-faint: #544D43;
+
+  --border-color: rgba(237, 230, 216, 0.10);
+  --border-subtle: rgba(237, 230, 216, 0.05);
+  --border-hover: rgba(237, 230, 216, 0.25);
+
+  /* Terracotta slightly brightened for dark backgrounds */
+  --accent: #D96B3D;
+  --accent-hover: #E88358;
+  --accent-faint: rgba(217, 107, 61, 0.12);
+  --accent-border: rgba(217, 107, 61, 0.30);
+  --accent-contrast: #141210;
+
+  --color-note-bg: rgba(90, 130, 210, 0.10);
+  --color-note-border: #6B8ECB;
+  --color-note-text: #A4BFE8;
+
+  --color-tip-bg: rgba(60, 130, 110, 0.10);
+  --color-tip-border: #4D8F7D;
+  --color-tip-text: #96D1C1;
+
+  --color-warning-bg: rgba(217, 107, 61, 0.10);
+  --color-warning-border: #D96B3D;
+  --color-warning-text: #EDB29A;
+}
+
+/* --- CSS Reset & Base Elements --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1.125rem; /* ~18px */
+  line-height: 1.7;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: var(--theme-transition);
+  position: relative;
+}
+
+/* --- Subtle Paper-Grain Overlay --- */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] body::before {
+  opacity: 0.025;
+}
+
+/* --- Selection Styling --- */
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* --- Skip to Main Content link (Accessibility) --- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-4);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 10000;
+  text-decoration: none;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+/* --- Focus-visible styling --- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --- Typography Hierarchy --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: var(--space-3);
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  letter-spacing: -0.015em;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+p {
+  margin-bottom: var(--space-4);
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+img, svg, picture, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+li {
+  margin-bottom: var(--space-1);
+}
+
+/* --- Utility Layout Classes --- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* --- Fade-in-up animation on scroll --- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
